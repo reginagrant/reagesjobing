@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>重新就業計劃｜讓你安心作業，重新出發！</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --green-dark:#2d5a1b;
+    --green:#3d7a26;
+    --green-mid:#4e9a32;
+    --green-light:#6ab84a;
+    --green-pale:#e8f5e0;
+    --green-bg:#f2f9ec;
+    --sky:#c8e6f0;
+    --gold:#c8960a;
+    --gold-light:#e8b830;
+    --white:#ffffff;
+    --text:#1e3d10;
+    --muted:#5a7a48;
+    --bg:#f5faf0;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:'Noto Sans TC',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+
+  /* TOP BAR */
+  .top-bar{
+    background:linear-gradient(90deg,var(--green-dark),var(--green),var(--green-dark));
+    color:#fff;
+    text-align:center;
+    padding:10px 16px;
+    font-size:14px;
+    font-weight:700;
+    letter-spacing:0.5px;
+  }
+  .top-bar a{color:#fff;text-decoration:none;font-weight:800;}
+  .top-bar a:hover{text-decoration:underline;opacity:0.9;}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:999;
+    background:rgba(255,255,255,0.97);
+    border-bottom:3px solid var(--green);
+    display:flex;align-items:center;justify-content:space-between;
+    padding:0 20px;height:64px;
+    box-shadow:0 2px 20px rgba(61,122,38,0.12);
+  }
+  .nav-brand{
+    color:var(--green-dark);font-size:18px;font-weight:800;
+    display:flex;align-items:center;gap:10px;letter-spacing:0.5px;
+  }
+  .nav-brand .brand-icon{
+    width:36px;height:36px;
+    background:linear-gradient(135deg,var(--green),var(--green-dark));
+    border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:16px;color:#fff;
+    box-shadow:0 0 12px rgba(61,122,38,0.3);
+  }
+  .nav-links{display:flex;align-items:center;gap:6px;}
+  .nav-links a{
+    color:var(--green-dark);text-decoration:none;
+    padding:8px 14px;border-radius:6px;font-size:14px;font-weight:500;
+    transition:all .2s;
+  }
+  .nav-links a:hover{color:var(--green);background:var(--green-pale);}
+  .nav-links .btn-apply{
+    background:linear-gradient(135deg,var(--green),var(--green-dark));
+    color:#fff;padding:8px 20px;border-radius:20px;font-weight:800;
+    box-shadow:0 2px 12px rgba(61,122,38,0.3);
+  }
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px;}
+  .hamburger span{width:24px;height:2px;background:var(--green);border-radius:2px;transition:all .3s;}
+  .mobile-menu{
+    display:none;position:fixed;top:64px;left:0;right:0;
+    background:#fff;border-bottom:3px solid var(--green);
+    z-index:998;padding:16px;flex-direction:column;gap:6px;
+    box-shadow:0 8px 24px rgba(61,122,38,0.1);
+  }
+  .mobile-menu a{
+    color:var(--text);text-decoration:none;padding:12px 16px;
+    border-radius:8px;font-size:16px;font-weight:500;
+    border-bottom:1px solid var(--green-pale);
+  }
+  .mobile-menu.open{display:flex;}
+
+  /* HERO */
+  .hero{
+    min-height:90vh;
+    background:
+      radial-gradient(ellipse at 75% 25%, rgba(106,184,74,0.15) 0%, transparent 55%),
+      radial-gradient(ellipse at 15% 75%, rgba(61,122,38,0.1) 0%, transparent 50%),
+      linear-gradient(160deg,#edf7e4 0%,#e0f2d4 40%,#d4ecca 100%);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;overflow:hidden;
+    padding:60px 20px;
+  }
+  .hero-deco{position:absolute;pointer-events:none;border-radius:50%;z-index:1;}
+  .hero-deco-1{width:500px;height:500px;background:radial-gradient(circle,rgba(106,184,74,0.08),transparent);top:-150px;right:-150px;}
+  .hero-deco-2{width:300px;height:300px;background:radial-gradient(circle,rgba(61,122,38,0.06),transparent);bottom:-80px;left:-80px;}
+
+  /* floating badges - 調整手機端顯示 */
+  .float-tag{
+    position:absolute;
+    background:rgba(255,255,255,0.9);
+    backdrop-filter:blur(8px);
+    border:1px solid rgba(61,122,38,0.2);
+    border-radius:30px;
+    color:var(--green-dark);font-size:12px;font-weight:700;
+    padding:7px 16px;
+    animation:floatY 4s ease-in-out infinite;
+    z-index:2;
+    box-shadow:0 4px 16px rgba(61,122,38,0.1);
+    white-space: nowrap;
+  }
+  .float-tag-1{top:15%;left:5%;}
+  .float-tag-2{top:18%;right:5%;}
+  .float-tag-3{bottom:15%;left:5%;}
+  @keyframes floatY{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+
+  .hero-content{position:relative;z-index:10;text-align:center;max-width:800px;width:100%;}
+  .hero-badge{
+    display:inline-block;
+    background:rgba(61,122,38,0.1);
+    border:1px solid rgba(61,122,38,0.2);
+    color:var(--green-dark);border-radius:20px;
+    padding:6px 16px;font-size:13px;font-weight:700;
+    margin-bottom:20px;
+  }
+  .hero-title{
+    font-size:clamp(1.8rem, 8vw, 3.2rem);
+    font-weight:900;
+    color:var(--green-dark);
+    line-height:1.3;
+    margin-bottom:15px;
+    word-break: keep-all;
+  }
+  .hero-title .highlight{
+    background:linear-gradient(135deg,var(--green-dark),var(--green-light));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
+  .hero-title .highlight-gold{color:var(--gold);-webkit-text-fill-color:var(--gold);}
+  .hero-subtitle{font-size:clamp(1rem, 4vw, 1.25rem);color:var(--green-mid);margin-bottom:8px;font-weight:600;}
+  .hero-desc{font-size:14px;color:var(--muted);margin-bottom:30px;line-height:1.6;}
+
+  .hero-features{
+    display:flex;flex-direction:column;gap:10px;
+    margin: 0 auto 30px;text-align:left;
+    background:rgba(255,255,255,0.7);
+    border:1px solid rgba(61,122,38,0.15);
+    border-radius:16px;padding:18px 20px;
+    max-width: 400px;
+  }
+  .hero-feature-item{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:600;color:var(--green-dark);}
+  .hero-feature-item .dot{width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;}
+
+  .hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .btn-primary, .btn-line-hero, .btn-secondary{
+    padding:14px 28px;border-radius:30px;text-decoration:none;font-size:16px;font-weight:800;
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all .3s;
+    width: auto;min-width: 200px;
+  }
+  .btn-primary{background:linear-gradient(135deg,var(--green),var(--green-dark));color:#fff;box-shadow:0 4px 20px rgba(61,122,38,0.3);}
+  .btn-line-hero{background:#06c755;color:#fff;box-shadow:0 4px 20px rgba(6,199,85,0.3);}
+  .btn-secondary{background:#fff;border:2px solid var(--green);color:var(--green-dark);}
+
+  .hero-badges{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:20px;}
+  .hero-badge-item{background:linear-gradient(135deg,#f5e6a0,#e8c830);color:var(--green-dark);padding:5px 14px;border-radius:20px;font-size:12px;font-weight:700;}
+
+  /* AD SECTION */
+  .ad-section{width:100%;background:#fff;padding:20px 0;}
+  .ad-section img{width:100%;height:auto;display:block;max-width: 1000px;margin: 0 auto;}
+
+  /* SECTION */
+  section{padding:60px 20px;}
+  .section-title{text-align:center;margin-bottom:40px;}
+  .section-title h2{font-size:clamp(1.5rem, 5vw, 2rem);font-weight:800;color:var(--green-dark);margin-bottom:10px;}
+  .section-title .title-line{width:50px;height:4px;background:var(--green);margin:12px auto 0;border-radius:2px;}
+
+  /* GRID SYSTEM */
+  .cards-grid, .jobs-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;max-width:1100px;margin:0 auto;
+  }
+  .card, .job-card{
+    background:#fff;border:1px solid rgba(61,122,38,0.1);border-radius:16px;padding:24px;
+    transition:all .3s;
+  }
+  .card{background:linear-gradient(135deg,#f5fbee,#eef7e5);}
+  .card-icon, .job-icon{font-size:2.5rem;margin-bottom:12px;}
+  .card h3, .job-card h3{font-size:1.1rem;margin-bottom:8px;color:var(--green-dark);}
+  .card p, .job-card p{font-size:14px;color:var(--muted);line-height:1.6;}
+
+  /* CTA BANNER */
+  .cta-banner{background:linear-gradient(135deg,var(--green-dark),var(--green));padding:50px 20px;text-align:center;color:#fff;}
+  .cta-banner h2{font-size:clamp(1.3rem, 5vw, 1.8rem);margin-bottom:15px;}
+  .btn-cta{background:#fff;color:var(--green-dark);padding:14px 36px;border-radius:30px;text-decoration:none;font-weight:800;display:inline-block;}
+
+  /* FORM */
+  .form-wrap{max-width:500px;margin:0 auto;}
+  .form-group{margin-bottom:15px;text-align:left;}
+  .form-group label{display:block;font-size:14px;font-weight:600;margin-bottom:6px;color:var(--green-dark);}
+  .form-group input, .form-group select{width:100%;padding:12px;border:2px solid rgba(61,122,38,0.15);border-radius:10px;font-size:15px;}
+  .btn-submit{width:100%;padding:14px;background:var(--green-dark);color:#fff;border:none;border-radius:30px;font-size:16px;font-weight:800;cursor:pointer;}
+
+  /* FOOTER */
+  footer{background:var(--green-dark);color:#fff;padding:40px 20px;text-align:center;}
+  footer a.btn-cta-sm{background:var(--green-light);color:#fff;padding:10px 24px;border-radius:20px;text-decoration:none;font-weight:800;display:inline-block;margin-bottom:20px;}
+  footer p{font-size:12px;opacity:0.6;}
+
+  /* RESPONSIVE FIXES */
+  @media(max-width:768px){
+    .nav-links{display:none;}
+    .hamburger{display:flex;}
+    .hero{padding-top:40px; min-height: auto;}
+    .float-tag{display:none;} /* 手機端隱藏漂浮標籤防止蓋到字 */
+    .hero-title br{display: block;}
+    .hero-btns{flex-direction:column; width: 100%;}
+    .btn-primary, .btn-line-hero, .btn-secondary{width: 100%; min-width: unset;}
+    .cards-grid, .jobs-grid{grid-template-columns: 1fr;}
+    .hero-features{max-width: 100%;}
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  🌿 <a href="https://line.me/ti/p/3HXxNhLdAm" target="_blank">加入 LINE 立即了解重新就業計劃！</a>
+</div>
+
+<nav>
+  <div class="nav-brand"><div class="brand-icon">🌿</div>重新就業計劃</div>
+  <div class="nav-links">
+    <a href="#home">首頁</a>
+    <a href="#content">內容</a>
+    <a href="#apply" class="btn-apply">✍️ 立即應徵</a>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="closeMenu()">🏠 首頁</a>
+  <a href="#content" onclick="closeMenu()">📋 內容</a>
+  <a href="#apply" onclick="closeMenu()">✍️ 立即填表應徵</a>
+</div>
+
+<section class="hero" id="home">
+  <div class="hero-deco hero-deco-1"></div>
+  <div class="hero-deco hero-deco-2"></div>
+  <div class="float-tag float-tag-1">⏰ 時間彈性</div>
+  <div class="float-tag float-tag-2">🎁 福利優渥</div>
+  <div class="float-tag float-tag-3">🌟 友善職場</div>
+  <div class="hero-content">
+    <div class="hero-badge">🌿 重新就業計劃・招募中</div>
+    <h1 class="hero-title"><span class="highlight">重新就業計劃</span><br>讓你安心作業<br><span class="highlight-gold">重新出發</span>！</h1>
+    <p class="hero-subtitle">時間彈性・無經驗可・環境單純</p>
+    <p class="hero-desc">三節禮金・福利待遇・職災保障<br>讓你無後顧之憂</p>
+    <div class="hero-features">
+      <div class="hero-feature-item"><span class="dot"></span>時間彈性，無經驗可</div>
+      <div class="hero-feature-item"><span class="dot"></span>環境單純友善</div>
+      <div class="hero-feature-item"><span class="dot"></span>重新找回自信自我</div>
+    </div>
+    <div class="hero-btns">
+      <a href="#apply" class="btn-primary">🌿 立即應徵</a>
+      <a href="https://line.me/ti/p/3HXxNhLdAm" target="_blank" class="btn-line-hero">加入 LINE 諮詢</a>
+    </div>
+    <div class="hero-badges">
+      <span class="hero-badge-item">🎁 三節禮金</span>
+      <span class="hero-badge-item">🛡️ 職災保障</span>
+      <span class="hero-badge-item">💼 福利待遇</span>
+    </div>
+  </div>
+</section>
+
+<div class="ad-section">
+  <img src="data:image/jpeg;base64,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" alt="AD">
+</div>
+
+<section id="content">
+  <div class="section-title">
+    <h2>為什麼選擇我們？</h2>
+    <p>提供最友善的環境，讓您重拾職場價值</p>
+    <div class="title-line"></div>
+  </div>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">🕒</div>
+      <h3>時間彈性</h3>
+      <p>可根據您的生活需求調整作業時間，家庭工作兩不誤。</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🤝</div>
+      <h3>友善環境</h3>
+      <p>專人指導，無經驗也沒關係，大家都會熱心協助您。</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🛡️</div>
+      <h3>職災保障</h3>
+      <p>完整的保障制度，讓您在作業時感到無比安心。</p>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner">
+  <h2>現在就加入我們，開啟新篇章！</h2>
+  <p>我們在尋找積極、負責的您</p>
+  <a href="#apply" class="btn-cta">立即報名</a>
+</section>
+
+<section class="form-section" id="apply">
+  <div class="section-title">
+    <h2>應徵申請表</h2>
+    <p>填寫下方資訊，我們將盡快與您聯繫</p>
+    <div class="title-line"></div>
+  </div>
+  <div class="form-wrap" id="formArea">
+    <form onsubmit="handleSubmit(event)">
+      <div class="form-group">
+        <label>姓名 <span style="color:red">*</span></label>
+        <input type="text" name="name" placeholder="您的姓名" required>
+      </div>
+      <div class="form-group">
+        <label>手機號碼 <span style="color:red">*</span></label>
+        <input type="tel" name="phone" placeholder="例如：0912345678" required>
+      </div>
+      <div class="form-group">
+        <label>方便聯絡時間</label>
+        <select name="time">
+          <option value="隨時">隨時皆可</option>
+          <option value="上午">上午 (09:00-12:00)</option>
+          <option value="下午">下午 (13:00-18:00)</option>
+          <option value="晚上">晚上 (19:00-21:00)</option>
+        </select>
+      </div>
+      <button type="submit" class="btn-submit" id="submitBtn">送出申請</button>
+    </form>
+  </div>
+  <div id="successBox" style="display:none; text-align:center; padding:40px; background:#f0f9eb; border-radius:20px;">
+    <h3>✅ 申請已送出！</h3>
+    <p>感謝您的應徵，我們將盡快聯絡您。</p>
+    <a href="https://line.me/ti/p/3HXxNhLdAm" class="btn-line-hero">加入 LINE 優先審核</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-cta">
+    <a href="https://line.me/ti/p/3HXxNhLdAm" target="_blank" class="btn-cta-sm">🌿 加入 LINE・立即應徵</a>
+  </div>
+  <p>© 2025 重新就業計劃・時間彈性・無經驗可</p>
+</footer>
+
+<script>
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) {
+      t.scrollIntoView({behavior:'smooth', block:'start'});
+      closeMenu();
+    }
+  });
+});
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = '送出中...';
+  setTimeout(() => {
+    document.getElementById('formArea').style.display = 'none';
+    document.getElementById('successBox').style.display = 'block';
+  }, 1000);
+}
+</script>
+</body>
+</html>
